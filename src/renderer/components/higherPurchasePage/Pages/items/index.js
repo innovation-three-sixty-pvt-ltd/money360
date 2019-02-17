@@ -1,19 +1,20 @@
 import React from 'react'
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom'
-import Dropdown from 'react-bootstrap/Dropdown';
-import UserForm from './userForm';
-//import './../../stylesheets/bootstrapreact/new.css'
-
-class Sidebar extends React.Component{
+//import UserForm from './userForm';
+import Topbar from './../../../topbar/index'
+//import Customertab from './../customerPage/Customer'
+import Items from './items'
+class Index extends React.Component{
     render() {
         return <div>
+        <Topbar/>
 <div id="wrapper">
   {/*BEGIN SIDEBAR MENU*/}
   <nav id="sidebar" role="navigation" data-step={2} data-intro="Template has <b>many navigation styles</b>" data-position="right" className="navbar-default navbar-static-side">
     <div className="sidebar-collapse menu-scroll bg-grey">
       <ul id="side-menu" className="nav">
         <div className="clearfix" />
-        <li><Link to="/customer"><i className="fa fa-user fa-fw">
+        <li><Link to="/"><i className="fa fa-user fa-fw">
               <div className="icon-bg bg-orange" />
             </i><span className="menu-title">Customer</span></Link></li>
         <li><Link to="/fixed-deposits"><i className="fa fa-desktop fa-fw">
@@ -26,9 +27,9 @@ class Sidebar extends React.Component{
         </li>
         <li className="active"><Link to="/higherPurchase"><i className="fa fa-edit fa-fw">
               <div className="icon-bg bg-violet" />
-            </i><span className="menu-title">Higher Purchase</span></Link> 
+            </i><span className="menu-title">Higher Purchase</span></Link>
         </li>
-        <li><Link to="/higherPurchase/items">&nbsp;&nbsp;<i className="fa fa-plus">
+        <li className="active1"><Link to="/higherPurchase/items">&nbsp;&nbsp;<i className="fa fa-plus">
               <div className="icon-bg bg-green" />
             </i><span className="menu-title">&nbsp;&nbsp;Items</span></Link>
         </li>
@@ -73,7 +74,17 @@ class Sidebar extends React.Component{
   </nav>
   {/*END SIDEBAR MENU*/}
   {/*BEGIN CHAT FORM*/}
-  
+  <div id="page-wrapper">
+    {/*BEGIN TITLE & BREADCRUMB PAGE*/}
+    
+    {/*END TITLE & BREADCRUMB PAGE*/}
+    {/*BEGIN CONTENT*/}
+    <div>
+      <Items/>
+    </div>
+    {/*END CONTENT*/}
+    {/*END FOOTER*/}
+  </div>
   {/*END PAGE WRAPPER*/}
 </div>
 
@@ -82,4 +93,4 @@ class Sidebar extends React.Component{
       }
 }
 
-export default Sidebar
+export default Index

@@ -1,13 +1,13 @@
 import React from 'react'
-import Topbar from './renderer/components/indexPage/topbar'
-import Sidebar from './renderer/components/indexPage/sidebar'
-//import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Component } from 'react';
+import { HashRouter as Router, Route, Link, NavLink } from 'react-router-dom';
+import './renderer/assets/stylesheets/App.css'
+import Index from './renderer/components/indexPage/index'
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Topbar/>
-        <Sidebar/>
+        <Index/>
       </div>
     )
   }
