@@ -1,9 +1,29 @@
 import React from 'react'
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom'
-//import UserForm from './userForm';
-import Customertab from './Customer'
-import Topbar from './topbar'
+import Dropdown from 'react-bootstrap/Dropdown';
+//import Content from './content';
+import Topbar from './../topbar/index';
+import Content from './Body';
+import Customer from './Customer';
+//import './../../stylesheets/bootstrapreact/new.css'
+
 class Sidebar extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      show: true,
+      hide: false
+    }
+  }
+
+  hideCom(){
+    this.setState({
+      show: false,
+      hide: true
+    })
+  }
+
+
     render() {
         return <div>
         <Topbar/>
@@ -26,7 +46,7 @@ class Sidebar extends React.Component{
         </li>
         <li><Link to="/higherPurchase"><i className="fa fa-edit fa-fw">
               <div className="icon-bg bg-violet" />
-            </i><span className="menu-title">Higher Purchase</span></Link>
+            </i><span className="menu-title">Higher Purchase</span></Link> 
         </li>
         <li><Link to="/leasing"><i className="fa fa-th-list fa-fw">
               <div className="icon-bg bg-blue" />
@@ -57,29 +77,16 @@ class Sidebar extends React.Component{
   </nav>
   {/*END SIDEBAR MENU*/}
   {/*BEGIN CHAT FORM*/}
-  <div id="page-wrapper">
-    {/*BEGIN TITLE & BREADCRUMB PAGE*/}
-    <div id="title-breadcrumb-option-demo" className="page-title-breadcrumb">
-      <div className="page-header pull-left">
-        <div className="page-title">
-          Customer</div>
-      </div>
-      <ol className="breadcrumb page-breadcrumb pull-right">
-        <li><i className="fa fa-home" />&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i className="fa fa-angle-right" />&nbsp;&nbsp;</li>
-        <li className="hidden"><a href="#">Customer</a>&nbsp;&nbsp;<i className="fa fa-angle-right" />&nbsp;&nbsp;</li>
-        <li className="active">Customer</li>
-      </ol>
-      <div className="clearfix">
-      </div>
-    </div>
-    {/*END TITLE & BREADCRUMB PAGE*/}
-    {/*BEGIN CONTENT*/}
-    <div>
-      <Customertab/>
-    </div>
-    {/*END CONTENT*/}
-    {/*END FOOTER*/}
-  </div>
+  {
+                this.state.show?
+                <Content hideCom={this.hideCom.bind(this)}/>
+                :null
+              }
+              {
+                this.state.hide?
+                <Customer/>
+                :null
+              }     
   {/*END PAGE WRAPPER*/}
 </div>
 

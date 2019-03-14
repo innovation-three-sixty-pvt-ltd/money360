@@ -1,7 +1,8 @@
 import React from 'react'
-import Dropdown from '../higherPurchasePage/dropdown'
+//import Dropdown from '../higherPurchasePage/dropdown'
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom'
 import './../../assets/stylesheets/main.css'
+import './../../components/dropdownMenu/dropdown'
 import userimg from './../../assets/images/avatar/48.jpg'
 //import './../../stylesheets/jquery-ui-1.10.4.custom.min.css'
 import './../../assets/stylesheets/font-awesome.min.css'
@@ -17,6 +18,9 @@ import './../../assets/stylesheets/jquery.news-ticker.css'
 
  
 class Topbar extends React.Component{
+  
+
+
     render() {
         return (
             
@@ -29,7 +33,7 @@ class Topbar extends React.Component{
               <ul className="nav navbar navbar-top-links navbar-right mbn">
                 <li className="dropdown"><a data-hover="dropdown" href="#" className="dropdown-toggle"><i className="fa fa-bell fa-fw" /><span className="badge badge-green">3</span></a>
                 </li>
-                <li className="dropdown topbar-user"><a data-hover="dropdown" href="#" className="dropdown-toggle"><img src={userimg} alt className="img-responsive img-circle" />&nbsp;<span className="hidden-xs">Robert John</span>&nbsp;</a>
+                <li className="dropdown topbar-user" ><a data-hover="dropdown" className="dropdown-toggle"><img src={userimg} alt className="img-responsive img-circle" />&nbsp;<span className="hidden-xs">Robert John</span>&nbsp;</a>
                   <ul className="dropdown-menu dropdown-user pull-right">
                     <li><a href="#"><i className="fa fa-user" />My Profile</a></li>
                     <li><a href="#"><i className="fa fa-calendar" />My Calendar</a></li>
@@ -40,8 +44,11 @@ class Topbar extends React.Component{
                     <li><a href="Login.html"><i className="fa fa-key" />Log Out</a></li>
                   </ul>
                 </li>
+ 
               </ul>
+              {/* <Dropdown className="nav navbar navbar-top-links navbar-right mbn"/> */}
             </div>
+           
           </nav></div>
           );
 
