@@ -21,28 +21,36 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
 
 app.post('/add', (req, res)=>{
-    const cfName = req.body.firstName;
-    const clName = req.body.lastName;
-    const caddress = req.body.address;
-    const cphone = req.body.phone;
-    const ccountry = req.body.country;
-    const ccity = req.body.city;
-    const postal = req.body.postal;
-    const email = req.body.email;
-    const nic = req.body.nic;
-
+    const uid = req.body.uid
+    const title = req.body.title;
+    const nameCredentials = req.body.nameCredentials;
+    const fullName = req.body.fullName;
+    const addressNo = req.body.addressNo;
+    const addressStreet = req.body.addressStreet;
+    const city = req.body.city;
+    const district = req.body.district;
+    const country = req.body.country;
+    const identyNo = req.body.identyNo;
+    const dateOfIssue = req.body.dateOfIssue;
+    const dateOfBirth = req.body.dateOfBirth;
+    const gender = req.body.gender;
+    const occupation = req.body.occupation;
+    let values = [uid,title,nameCredentials,fullName,addressNo,addressStreet,city,district,country,identyNo,dateOfIssue,dateOfBirth,gender,occupation]
+   
     pool.connect((err, db, done) =>{
         if(err){
             return console.log(err);
         }
         else{
-            db.query('INSERT INTO public."cusTable"("cusFName", "cusAddress", "cusTel", "cusNic", "cusCountry", "cusCity", "cusPostalCode", "cusEmail", "cusLName") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',[cfName,caddress,cphone,nic,ccountry,ccity,postal,email,clName], (err, table) => {
+            db.query('INSERT INTO public."cusTable"("userId", "title", "nameCredentials", "fullName", "addressNo", "addressStreet", "city", "district", "country","identyNo","dateOfIssue","dateOfBirth", "gender", "Occupation") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',[...values], (err, table) => {
                 done();
                 if(err){
                     res.json({msg: false, data: err})
+                    console.log(err)
                 }
                 else{
                     res.json({msg:true, table:table});
+                    console.log(err)
                 }
             });
         }
@@ -68,12 +76,37 @@ app.post('/search', (req, res) => {
                     }
                 });
             }catch(Ex){
-
+                
             }
                 
         }
     })
 })
+
+
+app.post('/api/getVehicles', function(request, res){
+    pool.connect(function(err, db, done){
+        if (err) {
+            return response.status(400).send(err);
+        }else{
+            try{
+                db.query('SELECT * FROM public."vehicles"', function(err, table){
+                    done();
+                    if (err) {
+                        res.json({status: false, data: err})
+                        //return response.status(400).send(err);
+                    } else {
+                        res.json({status: true, data: table.rows})
+                    }
+                })
+            }
+            catch(Ex){
+
+            }
+            
+        }
+    })
+});
 
 app.post('/delete', (req, res) => {
     const nic = req.body.nic;
@@ -185,24 +218,7 @@ app.post('/update/:customer_id', function(request, response) {
 
 });
 
-app.get('/api/getVehicles', function(request, response){
-    pool.connect(function(err, db, done){
-        if (err) {
-            return response.status(400).send(err);
-        }else{
-            db.query('SELECT * FROM vehicles', function(err, table){
-                done();
-                if (err) {
-                    return response.status(400).send(err);
-                } else {
-                    //console.log('DATA INSERTED');
-                    db.end();
-                    response.status(201).send(table.rows);
-                }
-            })
-        }
-    })
-});
+
 
 
 app.post('/api/add-vehicles', function(request, response){
@@ -223,6 +239,7 @@ app.post('/api/add-vehicles', function(request, response){
             db.query('INSERT INTO vehicles (vehicle_no, chassis_no, engine_no, model, make, color, vehicle_image, customer_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', [...values], (err, table) => {
                 done();
                 if (err) {
+                    console.log("Not")
                     return response.status(400).send(err);
                 } else {
                     console.log('DATA INSERTED');
